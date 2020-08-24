@@ -1,0 +1,17 @@
+- hosts: all
+  vars:
+    - packagename: "httpd"
+  tasks:
+    - package:
+        name: "{{ packagename  }}"
+        state: present
+
+    - name: Copy Web Page
+      get_url:
+         dest: "/var/www/html"
+         url: "https://raw.githubusercontent.com/a1-s2/Ansible_AWS_Task/master/index.html"
+
+    - service:
+         name: "httpd"
+         state: started
+         enabled: yes
