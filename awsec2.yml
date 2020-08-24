@@ -1,0 +1,18 @@
+- hosts: localhost
+  vars_files:
+          - credential.yml
+  tasks:
+  - name: Launching AWS Instance
+    ec2:
+      key_name: keynew
+      instance_type: t2.micro
+      image: "ami-0ebc1ac48dfd14136"
+      wait: yes
+      count: 1
+      aws_access_key: "{{ ansibleuser  }}"
+      aws_secret_key: "{{ ansipass }}"
+      vpc_subnet_id: subnet-82c7fdea
+      region: "ap-south-1"
+      group_id: "sg-9e0c4dfc"
+      assign_public_ip: yes
+      state: present
